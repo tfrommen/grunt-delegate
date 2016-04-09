@@ -1,0 +1,50 @@
+{
+  "name": "grunt-delegate",
+  "version": "1.0.0-alpha.1",
+  "description": "Run a task (and an optional target) while using an arbitrary set of files to run checks against.",
+  "keywords": [
+    "alias",
+    "changed",
+    "delegate",
+    "files",
+    "forward",
+    "grunt",
+    "gruntplugin",
+    "newer",
+    "plugin",
+    "proxy",
+    "src",
+    "tasks"
+  ],
+  "homepage": "https://github.com/tfrommen/grunt-delegate",
+  "bugs": {
+    "url": "https://github.com/tfrommen/grunt-delegate/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Thorsten Frommen",
+    "email": "info@tfrommen.de",
+    "url": "http://tfrommen.de"
+  },
+  "main": "tasks/delegate.js",
+  "repository": "tfrommen/grunt-delegate",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "faucet": "0.0.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-jsonlint": "^1.0.7",
+    "grunt-jsvalidate": "^0.2.2",
+    "grunt-lineending": "^0.2.4",
+    "grunt-shell": "^1.2.1",
+    "jshint-stylish": "^2.1.0",
+    "load-grunt-tasks": "^3.5.0",
+    "sinon": "^1.17.3",
+    "tape": "^4.5.1"
+  },
+  "peerDependencies": {
+    "grunt": ">=0.4.0"
+  }
+}

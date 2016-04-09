@@ -1,0 +1,20 @@
+sudo: false
+
+language: node_js
+
+cache:
+  directories:
+    - node_modules
+
+node_js:
+  - "5"
+  - "4"
+  - "0.12"
+  - "0.10"
+  - "iojs"
+
+matrix:
+  fast_finish: true
+
+before_install:
+  - if [ "$TRAVIS_NODE_VERSION" = "0.10" ]; then npm i -g npm@2; fi
