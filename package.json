@@ -1,6 +1,6 @@
 {
   "name": "grunt-delegate",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Run a task (and an optional target) while using an arbitrary set of files to run checks against.",
   "keywords": [
     "alias",
