@@ -18,3 +18,6 @@ matrix:
 
 before_install:
   - if [ "$TRAVIS_NODE_VERSION" = "0.10" ]; then npm i -g npm@2; fi
+
+install:
+  - npm i -g grunt-cli
