@@ -94,7 +94,7 @@ grunt.initConfig( {
 } );
 ```
 
-#### Test `.php` source files if any of them **or** one of the tests is newer than the time of the last run
+#### Test `.php` source files if any of them or one of the tests is newer than the time of the last run
 
 In this example, running `$ grunt newer:delegate:phpunit` will run the `shell` task with the `phpunit` target (see the `task` property of the according `delegate` configuration) if any `.php` source files or tests is newer than the time of the last run.
 You cannot just run `$ grunt newer:shell:phpunit`, because in the `shell` task are no files specified.
@@ -119,7 +119,7 @@ grunt.initConfig( {
 
 ## Changelog
 
-See [CHANGELOG.md][CHANGELOG.md).
+See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
