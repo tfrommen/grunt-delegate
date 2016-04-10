@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0-alpha.6
+
+* Add alias task example to readme.
+
 ## 1.0.0-alpha.5
 
 * Improve readme.

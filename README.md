@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-If you haven't used [Grunt](http://gruntjs.com) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.
+If you haven't used [Grunt](http://gruntjs.com) before, be sure to check out the [Getting started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.
 Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
@@ -19,7 +19,7 @@ grunt.loadNpmTasks( 'grunt-delegate' );
 
 ## Configuration
 
-There are no options for the `delegate` (multi) task itself.
+There are no options for the `delegate` [multi task](http://gruntjs.com/creating-tasks#multi-tasks) itself.
 
 Each target configuration can have an optional `task` property that holds the name of another task.
 If a task is specified, Grunt tries to run it (see ES6 example below).
@@ -73,6 +73,13 @@ By having `grunt-newer` check the files provided by the `delegate` configuration
 
 ```js
 grunt.initConfig( {
+	delegate: {
+		transpile: {
+			src: [ 'resources/js/**/*.js' ],
+			task: 'browserify:admin'
+		}
+	},
+
 	browserify: {
 		admin: {
 			options: {
@@ -91,13 +98,6 @@ grunt.initConfig( {
 			src: [],
 			dest: 'public/vendor.js'
 		},
-	},
-
-	delegate: {
-		transpile: {
-			src: [ 'resources/js/**/*.js' ],
-			task: 'browserify:admin'
-		}
 	}
 } );
 ```
@@ -123,6 +123,34 @@ grunt.initConfig( {
 		}
 	},
 } );
+```
+
+#### Run an alias task when specific files changed since the last run
+
+In this example, running `$ grunt changed:delegate:scripts` will run the `scripts` [alias task](http://gruntjs.com/creating-tasks#alias-tasks) if any `.js` source files changed since the last run.  
+You cannot just run `$ grunt changed:scripts`, because in the `scripts` task are no files specified.  
+By having `grunt-changed` check the files provided by the `delegate` configuration, however, **any** changed `.js` source file will cause the `scripts` alias task to get run.
+
+```js
+grunt.initConfig( {
+	delegate: {
+		scripts: {
+			src: [ 'resources/js/**/*.js' ],
+			task: 'scripts'
+		}
+	},
+
+	// Other task configurations here...
+} );
+
+grunt.registerTask( 'scripts', [
+	'eslint:src',
+	'shell:tape',
+	'browserify',
+	'jsvalidate:dest',
+	'lineending:scripts',
+	'uglify'
+] );
 ```
 
 ## License
