@@ -17,9 +17,7 @@ test( 'the module is a function', function( assert ) {
 
 test( 'the module registers the expected multi task', function( assert ) {
 	var grunt = {
-		registerMultiTask: sinon.spy( function( taskName, description, taskFunction ) {
-			// TODO: Do something with "taskFunction"...?!
-		} ),
+		registerMultiTask: sinon.spy(),
 		task: {
 			run: sinon.spy()
 		}
@@ -42,14 +40,84 @@ test( 'the module registers the expected multi task', function( assert ) {
 	// Capture the task function for direct testing.
 	var delegate = grunt.registerMultiTask.firstCall.args[ 2 ];
 
-	// TODO: Test the captured function - which doesn't seem to work as expected...?!
-	// delegate();
+	// Nested test, as it relies on the captured task function.
+	assert.test( 'the delegate function runs all specified tasks', function( assert ) {
+		// Reset the spy.
+		grunt.task.run.reset();
 
-	// assert.equal(
-	// 	grunt.task.run.callCount,
-	// 	1,
-	// 	'running the task function SHOULD (try to) run one task.'
-	// );
+		delegate.call( {
+			data: {}
+		} );
+
+		assert.equal(
+			grunt.task.run.callCount,
+			1,
+			'the delegate function SHOULD run one task.'
+		);
+
+		assert.equal(
+			grunt.task.run.calledWith( undefined ),
+			true,
+			'the delegate function SHOULD run all specified tasks.'
+		);
+
+		assert.end();
+	} );
+
+	// Nested test, as it relies on the captured task function.
+	assert.test( 'the delegate function runs the task named like the current target', function( assert ) {
+		var target = 'someTask';
+
+		// Reset the spy.
+		grunt.task.run.reset();
+
+		delegate.call( {
+			data: {},
+			target: target
+		} );
+
+		assert.equal(
+			grunt.task.run.callCount,
+			1,
+			'the delegate function SHOULD run one task.'
+		);
+
+		assert.equal(
+			grunt.task.run.calledWith( target ),
+			true,
+			'the delegate function SHOULD run the task named like the current target.'
+		);
+
+		assert.end();
+	} );
+
+	// Nested test, as it relies on the captured task function.
+	assert.test( 'the delegate function runs the task specified in the current target', function( assert ) {
+		var task = 'someTask:someTarget';
+
+		// Reset the spy.
+		grunt.task.run.reset();
+
+		delegate.call( {
+			data: {
+				task: task
+			}
+		} );
+
+		assert.equal(
+			grunt.task.run.callCount,
+			1,
+			'the delegate function SHOULD run one task.'
+		);
+
+		assert.equal(
+			grunt.task.run.calledWith( task ),
+			true,
+			'the delegate function SHOULD run the task specified in the current target.'
+		);
+
+		assert.end();
+	} );
 
 	assert.end();
 } );

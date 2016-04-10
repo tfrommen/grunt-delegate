@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0
+
+* Initial, official release.
+* Update test file.
+
 ## 1.0.0-alpha.6
 
 * Add alias task example to readme.
