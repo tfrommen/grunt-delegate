@@ -17,6 +17,14 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks( 'grunt-delegate' );
 ```
 
+## Configuration
+
+There are no options for the `delegate` (multi) task itself.
+
+Each target configuration can have an optional `task` property that holds the name of another task.
+If a task is specified, Grunt tries to run it (see ES6 example below).
+Otherwise, Grunt tries to run a task with the name of the current target (see SASS example below).
+
 ## Usage
 
 _Run this task with the `$ grunt delegate` command._
@@ -31,7 +39,7 @@ Not yet perfectly clear? Let's see some real world examples then...
 
 #### Convert `.scss` files if any of them changed since the last run
 
-In this example, running `$ grunt changed:delegate:sass` (or `$ grunt changed:delegate` because `delegate` is a multi task) will run the `sass` task if any `.scss` file changed since the last run.  
+In this example, running `$ grunt changed:delegate:sass` will run the `sass` task if any `.scss` file changed since the last run.  
 You cannot just run `$ grunt changed:sass`, because the files specified in the `sass` task are the _root_ files only.
 Thus, `grunt-changed` is unaware of changed partials or modules.  
 By having `grunt-changed` check the files provided by the `delegate` configuration, however, **any** changed `.scss` file (compare `resources/scss/**/*.scss` with `resources/scss/*.scss`) will cause the `sass` task to get run.
